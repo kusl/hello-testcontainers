@@ -27,6 +27,7 @@ public sealed class CustomerServiceTest : IAsyncLifetime
         // When
         customerService.Create(new Customer(1, "George"));
         customerService.Create(new Customer(2, "John"));
+        customerService.Create(new Customer(3, "Mary"));
         IEnumerable<Customer> customers = customerService.GetCustomers();
 
         // Then
