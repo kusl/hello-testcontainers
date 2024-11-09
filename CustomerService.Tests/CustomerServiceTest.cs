@@ -30,6 +30,6 @@ public sealed class CustomerServiceTest : IAsyncLifetime
         IEnumerable<Customer> customers = customerService.GetCustomers();
 
         // Then
-        Assert.Equal(2, customers.Count());
+        Assert.Equal(3, customers.Count());
     }
 }
