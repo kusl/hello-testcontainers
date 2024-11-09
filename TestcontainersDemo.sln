@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerService", "CustomerService\CustomerService.csproj", "{235C6453-B8C9-4EB9-9C25-BE13D0275177}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerService.Tests", "CustomerService.Tests\CustomerService.Tests.csproj", "{FCA2EB73-A9E4-4BEA-9996-FD86BB81790E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{235C6453-B8C9-4EB9-9C25-BE13D0275177}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{235C6453-B8C9-4EB9-9C25-BE13D0275177}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{235C6453-B8C9-4EB9-9C25-BE13D0275177}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{235C6453-B8C9-4EB9-9C25-BE13D0275177}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCA2EB73-A9E4-4BEA-9996-FD86BB81790E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCA2EB73-A9E4-4BEA-9996-FD86BB81790E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCA2EB73-A9E4-4BEA-9996-FD86BB81790E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCA2EB73-A9E4-4BEA-9996-FD86BB81790E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
