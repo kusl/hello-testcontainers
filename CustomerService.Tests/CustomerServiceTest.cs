@@ -1,3 +1,4 @@
+using FluentAssertions;
 using Testcontainers.PostgreSql;
 
 namespace CustomerService.Tests;
@@ -29,8 +30,10 @@ public sealed class CustomerServiceTest : IAsyncLifetime
         customerService.Create(new Customer(2, "John"));
         customerService.Create(new Customer(3, "Mary"));
         IEnumerable<Customer> customers = customerService.GetCustomers();
+        
 
         // Then
-        Assert.Equal(3, customers.Count());
+        // Assert.Equal(3, customers.Count());
+        customers.Count().Should().Be(3);
     }
 }
