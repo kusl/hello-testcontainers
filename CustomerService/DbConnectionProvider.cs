@@ -3,17 +3,10 @@ using Npgsql;
 
 namespace CustomerService;
 
-public class DbConnectionProvider
+public sealed class DbConnectionProvider(string connectionString)
 {
-    private readonly string _connectionString;
-
-    public DbConnectionProvider(string connectionString)
+    public DbConnection GetConnection()
     {
-        _connectionString = connectionString;
-    }
-
-    public DbConnection GetDbConnection()
-    {
-        return new NpgsqlConnection(_connectionString);
+        return new NpgsqlConnection(connectionString);
     }
 }

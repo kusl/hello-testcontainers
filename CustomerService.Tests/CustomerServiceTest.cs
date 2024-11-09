@@ -22,12 +22,12 @@ public sealed class CustomerServiceTest : IAsyncLifetime
     public void ShouldReturnTwoCustomers()
     {
         // Given
-        var customerService = new global::CustomerService(new DbConnectionProvider(_postgres.GetConnectionString()));
+        CustomerService customerService = new CustomerService(new DbConnectionProvider(_postgres.GetConnectionString()));
 
         // When
         customerService.Create(new Customer(1, "George"));
         customerService.Create(new Customer(2, "John"));
-        var customers = customerService.GetCustomers();
+        IEnumerable<Customer> customers = customerService.GetCustomers();
 
         // Then
         Assert.Equal(2, customers.Count());

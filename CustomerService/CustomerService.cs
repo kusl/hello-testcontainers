@@ -1,4 +1,6 @@
-﻿namespace CustomerService;
+﻿using System.Data.Common;
+
+namespace CustomerService;
 
 public sealed class CustomerService
 {
@@ -13,35 +15,37 @@ public sealed class CustomerService
     public IEnumerable<Customer> GetCustomers()
     {
         IList<Customer> customers = new List<Customer>();
-        using var connection = _dbConnectionProvider.GetDbConnection();
-        using var command = connection.CreateCommand();
-        command.CommandText = "SELECT id, name FROM Customers";
+
+        using DbConnection connection = _dbConnectionProvider.GetConnection();
+        using DbCommand command = connection.CreateCommand();
+        command.CommandText = "SELECT id, name FROM customers";
         command.Connection?.Open();
-        
-        using var dataReader = command.ExecuteReader();
+
+        using DbDataReader dataReader = command.ExecuteReader();
         while (dataReader.Read())
         {
-            var id = dataReader.GetInt64(0);
-            var name = dataReader.GetString(1);
+            long id = dataReader.GetInt64(0);
+            string name = dataReader.GetString(1);
             customers.Add(new Customer(id, name));
         }
+
         return customers;
     }
 
     public void Create(Customer customer)
     {
-        using var connection = _dbConnectionProvider.GetDbConnection();
-        using var command = connection.CreateCommand();
-        
-        var id = command.CreateParameter();
-        id.ParameterName = "id";
+        using DbConnection connection = _dbConnectionProvider.GetConnection();
+        using DbCommand command = connection.CreateCommand();
+
+        DbParameter id = command.CreateParameter();
+        id.ParameterName = "@id";
         id.Value = customer.Id;
-        
-        var name = command.CreateParameter();
-        name.ParameterName = "name";
+
+        DbParameter name = command.CreateParameter();
+        name.ParameterName = "@name";
         name.Value = customer.Name;
-        
-        command.CommandText = "INSERT INTO Customers (id, name) VALUES (@id, @name)";
+
+        command.CommandText = "INSERT INTO customers (id, name) VALUES(@id, @name)";
         command.Parameters.Add(id);
         command.Parameters.Add(name);
         command.Connection?.Open();
@@ -50,10 +54,9 @@ public sealed class CustomerService
 
     private void CreateCustomersTable()
     {
-        using var connection = _dbConnectionProvider.GetDbConnection();
-        using var command = connection.CreateCommand();
-        command.CommandText =
-            "create table if not exists customers (id bigint not null, name varchar not null, primary key (id))";
+        using DbConnection connection = _dbConnectionProvider.GetConnection();
+        using DbCommand command = connection.CreateCommand();
+        command.CommandText = "CREATE TABLE IF NOT EXISTS customers (id BIGINT NOT NULL, name VARCHAR NOT NULL, PRIMARY KEY (id))";
         command.Connection?.Open();
         command.ExecuteNonQuery();
     }
