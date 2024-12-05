@@ -1,4 +1,3 @@
-using DotNet.Testcontainers.Builders;
 using FluentAssertions;
 using Testcontainers.PostgreSql;
 
@@ -10,12 +9,9 @@ public sealed class CustomerServiceTest : IAsyncLifetime
         .WithImage("postgres:15-alpine")
         .Build();
 
-    public async Task InitializeAsync()
+    public Task InitializeAsync()
     {
-        // return _postgres.StartAsync();
-        Console.WriteLine($"Starting container with ID: {_postgres.Id}");
-        await _postgres.StartAsync();
-        Console.WriteLine($"Container {_postgres.Id} started.");
+        return _postgres.StartAsync();
     }
 
     public Task DisposeAsync()
