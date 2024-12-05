@@ -7,7 +7,7 @@ namespace CustomerService.Tests;
 public sealed class CustomerServiceTest : IAsyncLifetime
 {
     private readonly PostgreSqlContainer _postgres = new PostgreSqlBuilder()
-        .WithImage("postgres:latest")
+        .WithImage("postgres:15-alpine")
         .Build();
 
     public async Task InitializeAsync()
