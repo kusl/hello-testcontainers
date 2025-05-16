@@ -1,5 +1,5 @@
-using FluentAssertions;
-using Testcontainers.PostgreSql;
+using Testcontainers.PostgreSql; // Keep this if DbConnectionProvider or other parts need it directly in tests, but for this specific test, it's used indirectly.
+// using Xunit; // This is now globally included via the <Using Include="Xunit"/> in your .csproj
 
 namespace CustomerService.Tests;
 
@@ -20,7 +20,7 @@ public sealed class CustomerServiceTest : IAsyncLifetime
     }
 
     [Fact]
-    public void ShouldReturnTwoCustomers()
+    public void ShouldReturnThreeCustomers() // Renamed test method to reflect the actual assertion
     {
         // Given
         CustomerService customerService = new CustomerService(new DbConnectionProvider(_postgres.GetConnectionString()));
@@ -30,10 +30,8 @@ public sealed class CustomerServiceTest : IAsyncLifetime
         customerService.Create(new Customer(2, "John"));
         customerService.Create(new Customer(3, "Mary"));
         IEnumerable<Customer> customers = customerService.GetCustomers();
-        
 
         // Then
-        // Assert.Equal(3, customers.Count());
-        customers.Count().Should().Be(3);
+        Assert.Equal(3, customers.Count());
     }
 }
