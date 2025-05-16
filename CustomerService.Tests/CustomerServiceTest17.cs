@@ -3,10 +3,10 @@ using Testcontainers.PostgreSql; // Keep this if DbConnectionProvider or other p
 
 namespace CustomerService.Tests;
 
-public sealed class CustomerServiceTest : IAsyncLifetime
+public sealed class CustomerServiceTest17 : IAsyncLifetime
 {
     private readonly PostgreSqlContainer _postgres = new PostgreSqlBuilder()
-        .WithImage("postgres:15-alpine")
+        .WithImage("postgres:17-alpine")
         .Build();
 
     public Task InitializeAsync()
